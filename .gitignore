@@ -1,0 +1,22 @@
+# Java
+*.class
+*.jar
+*.war
+*.ear
+
+# Build output
+out/
+bin/
+build/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# App output
+output/
