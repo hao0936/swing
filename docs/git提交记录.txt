@@ -1,0 +1,11 @@
+﻿Git is not available in this environment, so this is a placeholder.
+
+After installing Git and initializing the repo, run:
+  git log --oneline --decorate --graph --all
+
+Suggested iterative commits to show in the screenshot:
+  1) chore: scaffold project structure and README
+  2) feat: add core models and CSV datastore
+  3) feat: add services and referral singleton
+  4) feat: build Swing MVC UI with CRUD and export
+  5) docs: add reflection reports (EN/ZH)
