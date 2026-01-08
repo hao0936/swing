@@ -148,6 +148,9 @@ public class AppointmentPanel extends JPanel implements Localizable, SessionAwar
             return;
         }
         Appointment appointment = tableModel.getAppointmentAt(row);
+        if (!confirmDelete(appointment.getAppointmentId())) {
+            return;
+        }
         controller.getAppointments().remove(appointment);
         refreshView();
     }
@@ -162,8 +165,27 @@ public class AppointmentPanel extends JPanel implements Localizable, SessionAwar
             return;
         }
         Appointment appointment = tableModel.getAppointmentAt(row);
+        if (!confirmCancel(appointment.getAppointmentId())) {
+            return;
+        }
         controller.cancelAppointment(appointment);
         refreshView();
+    }
+
+    private boolean confirmDelete(String id) {
+        int result = JOptionPane.showConfirmDialog(this,
+            I18n.t("confirm.delete", id),
+            I18n.t("title.confirm"),
+            JOptionPane.YES_NO_OPTION);
+        return result == JOptionPane.YES_OPTION;
+    }
+
+    private boolean confirmCancel(String appointmentId) {
+        int result = JOptionPane.showConfirmDialog(this,
+            I18n.t("confirm.cancelAppointment", appointmentId),
+            I18n.t("title.confirm"),
+            JOptionPane.YES_NO_OPTION);
+        return result == JOptionPane.YES_OPTION;
     }
 
     @Override

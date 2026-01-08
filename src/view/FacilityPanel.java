@@ -126,8 +126,19 @@ public class FacilityPanel extends JPanel implements Localizable, SessionAware {
             return;
         }
         Facility facility = tableModel.getFacilityAt(row);
+        if (!confirmDelete(facility.getFacilityId())) {
+            return;
+        }
         controller.deleteFacility(facility);
         tableModel.fireTableDataChanged();
+    }
+
+    private boolean confirmDelete(String id) {
+        int result = JOptionPane.showConfirmDialog(this,
+            I18n.t("confirm.delete", id),
+            I18n.t("title.confirm"),
+            JOptionPane.YES_NO_OPTION);
+        return result == JOptionPane.YES_OPTION;
     }
 
     @Override

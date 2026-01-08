@@ -126,8 +126,19 @@ public class StaffPanel extends JPanel implements Localizable, SessionAware {
             return;
         }
         Staff member = tableModel.getStaffAt(row);
+        if (!confirmDelete(member.getStaffId())) {
+            return;
+        }
         controller.deleteStaff(member);
         tableModel.fireTableDataChanged();
+    }
+
+    private boolean confirmDelete(String id) {
+        int result = JOptionPane.showConfirmDialog(this,
+            I18n.t("confirm.delete", id),
+            I18n.t("title.confirm"),
+            JOptionPane.YES_NO_OPTION);
+        return result == JOptionPane.YES_OPTION;
     }
 
     @Override

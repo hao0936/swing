@@ -149,8 +149,19 @@ public class PrescriptionPanel extends JPanel implements Localizable, SessionAwa
             return;
         }
         Prescription prescription = tableModel.getPrescriptionAt(row);
+        if (!confirmDelete(prescription.getPrescriptionId())) {
+            return;
+        }
         controller.deletePrescription(prescription);
         refreshView();
+    }
+
+    private boolean confirmDelete(String id) {
+        int result = JOptionPane.showConfirmDialog(this,
+            I18n.t("confirm.delete", id),
+            I18n.t("title.confirm"),
+            JOptionPane.YES_NO_OPTION);
+        return result == JOptionPane.YES_OPTION;
     }
 
     private void exportPrescription() {

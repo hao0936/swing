@@ -139,8 +139,19 @@ public class PatientPanel extends JPanel implements Localizable, SessionAware {
             return;
         }
         Patient patient = tableModel.getPatientAt(row);
+        if (!confirmDelete(patient.getPatientId())) {
+            return;
+        }
         controller.deletePatient(patient);
         refreshView();
+    }
+
+    private boolean confirmDelete(String id) {
+        int result = JOptionPane.showConfirmDialog(this,
+            I18n.t("confirm.delete", id),
+            I18n.t("title.confirm"),
+            JOptionPane.YES_NO_OPTION);
+        return result == JOptionPane.YES_OPTION;
     }
 
     @Override

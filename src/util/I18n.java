@@ -45,6 +45,9 @@ public final class I18n {
         en.put("dialog.addReferral", "Add Referral");
         en.put("dialog.editReferral", "Edit Referral");
         en.put("dialog.login", "Login");
+        en.put("title.confirm", "Confirmation");
+        en.put("confirm.delete", "Delete selected record (%s)?");
+        en.put("confirm.cancelAppointment", "Cancel appointment (%s)?");
         en.put("message.selectRow", "Please select a row first.");
         en.put("message.selectUser", "Please select a user.");
         en.put("message.noUsers", "No users available for this role.");
@@ -99,6 +102,9 @@ public final class I18n {
         zh.put("dialog.addReferral", "新增转诊");
         zh.put("dialog.editReferral", "编辑转诊");
         zh.put("dialog.login", "登录");
+        zh.put("title.confirm", "确认");
+        zh.put("confirm.delete", "确定删除所选记录（%s）吗？");
+        zh.put("confirm.cancelAppointment", "确定取消所选预约（%s）吗？");
         zh.put("message.selectRow", "请先选择一行。");
         zh.put("message.selectUser", "请选择用户。");
         zh.put("message.noUsers", "该角色暂无可用用户。");
