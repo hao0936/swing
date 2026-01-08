@@ -20,7 +20,7 @@ public class TextExportService {
         throws IOException {
         Files.createDirectories(outputDir);
         String fileName = "prescription_" + prescription.getPrescriptionId() + ".txt";
-        Path target = outputDir.resolve(fileName);
+        Path target = resolveUnique(outputDir.resolve(fileName));
         String content = buildPrescriptionText(prescription, patient, clinician);
         Files.write(target, content.getBytes(StandardCharsets.UTF_8));
         return target;
@@ -31,11 +31,35 @@ public class TextExportService {
                                Facility referredFacility, Path outputDir) throws IOException {
         Files.createDirectories(outputDir);
         String fileName = "referral_" + referral.getReferralId() + ".txt";
-        Path target = outputDir.resolve(fileName);
+        Path target = resolveUnique(outputDir.resolve(fileName));
         String content = buildReferralText(referral, patient, referringClinician, referredClinician,
             referringFacility, referredFacility);
         Files.write(target, content.getBytes(StandardCharsets.UTF_8));
         return target;
+    }
+
+    private Path resolveUnique(Path target) {
+        if (!Files.exists(target)) {
+            return target;
+        }
+
+        String fileName = target.getFileName().toString();
+        String base = fileName;
+        String ext = "";
+        int dot = fileName.lastIndexOf('.');
+        if (dot > 0) {
+            base = fileName.substring(0, dot);
+            ext = fileName.substring(dot);
+        }
+
+        int counter = 2;
+        Path dir = target.getParent();
+        Path candidate = target;
+        while (Files.exists(candidate)) {
+            candidate = dir.resolve(base + "_" + counter + ext);
+            counter++;
+        }
+        return candidate;
     }
 
     private String buildPrescriptionText(Prescription prescription, Patient patient, Clinician clinician) {
